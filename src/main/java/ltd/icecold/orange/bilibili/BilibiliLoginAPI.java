@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Bilibili登录API
+ *
  * @author ice-cold
  */
 public class BilibiliLoginAPI implements CaptchaCallback {
@@ -23,6 +25,11 @@ public class BilibiliLoginAPI implements CaptchaCallback {
         return new HashMap<>();
     }
 
+    /**
+     * 生成验证码
+     * @return this
+     * @throws IOException Exception
+     */
     public BilibiliLoginAPI combineCaptcha() throws IOException {
         String body = Request.sendGet("http://passport.bilibili.com/web/captcha/combine?plat=6", new HashMap<>(), new HashMap<>()).body();
         JsonObject captchaKey = new JsonParser().parse(body).getAsJsonObject().get("data").getAsJsonObject().get("result").getAsJsonObject();
@@ -38,12 +45,23 @@ public class BilibiliLoginAPI implements CaptchaCallback {
         return this;
     }
 
-    public BilibiliLoginAPI openChallengeHtml(Integer port) throws IOException, InterruptedException {
+    /**
+     * 创建一个验证页面（测试中）
+     * @param port 端口
+     * @return this
+     * @throws IOException Exception
+     */
+    public BilibiliLoginAPI openChallengeHtml(Integer port) throws IOException {
         BilibiliLoginChallenge bilibiliLoginChallenge = new BilibiliLoginChallenge(loginChallenge, this);
         bilibiliLoginChallenge.challengeView(port);
         return this;
     }
 
+    /**
+     * 验证结果
+     * @param result 验证数据
+     * @return this
+     */
     public BilibiliLoginAPI setChallengeResult(LoginChallenge.Result result){
         if (result.getSeccode().isEmpty() || result.getValidate().isEmpty()){
             throw new NullPointerException("Error Challenge Result");
