@@ -39,6 +39,8 @@ public class AESCrypto {
     /**
      * aes-128-ecb解密
      * @param content 密文
+     * @param aesKey 密钥
+     * @param ivByte iv
      * @return 解密数据
      */
     public byte[] decryptECB(byte[] content, byte[] aesKey, byte[] ivByte) {
@@ -76,6 +78,8 @@ public class AESCrypto {
     /**
      * aes-128-cbc解密
      * @param content 密文
+     * @param aesKey 密钥
+     * @param ivByte iv
      * @return 解密数据
      */
     public byte[] decryptCBC(byte[] content, byte[] aesKey, byte[] ivByte) {
@@ -100,9 +104,9 @@ public class AESCrypto {
 
     /**
      * 生成iv
-     * @param iv
-     * @return
-     * @throws Exception
+     * @param iv iv
+     * @return params
+     * @throws Exception Exception
      */
     private static AlgorithmParameters generateIv(byte[] iv) throws Exception {
         AlgorithmParameters params = AlgorithmParameters.getInstance("AES");

@@ -18,10 +18,9 @@ public class HmacSHA1 {
      *
      * @param originalContent 被签名的字符串
      * @param encryptKey      密钥
-     * @return
-     * @throws Exception
+     * @return HMAC-SHA1加密数据
      */
-    public static byte[] HmacSHA1Encrypt(String originalContent, String encryptKey) {
+    public static byte[] hmacSHA1Encrypt(String originalContent, String encryptKey) {
         try {
             byte[] data = encryptKey.getBytes(StandardCharsets.UTF_8);
             SecretKey secretKey = new SecretKeySpec(data, "HmacSHA1");

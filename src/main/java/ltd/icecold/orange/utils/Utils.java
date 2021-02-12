@@ -71,7 +71,7 @@ public class Utils {
      * 补齐不足长度
      * @param length 长度
      * @param number 数字
-     * @return
+     * @return result
      */
     public static String padStart(int length, int number) {
         String f = "%0" + length + "d";
@@ -81,7 +81,7 @@ public class Utils {
     /**
      * 对应js中的encodeURIComponent
      * @param data 编码数据
-     * @return
+     * @return result
      */
     public static String encodeURIComponent(String data) {
         String result = null;
@@ -102,7 +102,7 @@ public class Utils {
     /**
      * 顾名思义
      * @param cookie map
-     * @return
+     * @return cookie
      */
     public static String cookieMap2String(Map<String, String> cookie) {
         StringBuilder stringBuilder = new StringBuilder();

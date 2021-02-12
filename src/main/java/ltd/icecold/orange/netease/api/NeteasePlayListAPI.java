@@ -20,6 +20,7 @@ public class NeteasePlayListAPI {
      * 获取歌单详情 传入歌单id获取对应歌单内的所有的音乐(未登录状态只能获取不完整的歌单,登录后是完整的)
      * @param id 歌单 id
      * @param s 歌单最近的 s 个收藏者
+     * @param cookie 用户cookie
      * @return result
      */
     public static NeteaseResponseBody playlistDetail(String id,String s,Map<String,String> cookie){

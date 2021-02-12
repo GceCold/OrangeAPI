@@ -19,6 +19,7 @@ public class NeteaseSearchAPI {
      * 搜索
      * @param keywords 关键词
      * @param limit 返回数量
+     * @param cookie 用户cookie
      * @return data
      */
     public NeteaseResponseBody search(String keywords, Integer limit, Map<String,String> cookie){
@@ -37,6 +38,7 @@ public class NeteaseSearchAPI {
      * @param type 搜索类型  默认:1  1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合
      * @param limit 返回数量
      * @param offset 偏移数量
+     * @param cookie 用户cookie
      * @return json
      */
     public NeteaseResponseBody search(String keywords,Integer type,Integer limit,Integer offset, Map<String,String> cookie){

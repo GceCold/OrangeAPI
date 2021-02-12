@@ -2,7 +2,6 @@ package ltd.icecold.orange.network;
 
 /**
  * UserAgent Enum
- *
  * @author ice-cold
  */
 public enum UserAgent {
@@ -35,7 +34,7 @@ public enum UserAgent {
     }
 
     /**
-     * Index -> UserAgent
+     * 通过Index获取UserAgent
      * @param index 引索
      * @return UserAgent
      */
