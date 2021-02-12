@@ -9,7 +9,7 @@
     <version>1.0.0</version>
 
     <name>OrangeAPI</name>
-    <description>Some web api or music api</description>
+    <description>The OrangeAPI provides some web API framework to easy develop</description>
     <url>https://www.ice-cold.ltd/</url>
 
     <licenses>
@@ -31,18 +31,17 @@
         <connection>scm:git:git@github.com:GceCold/OrangeAPI.git</connection>
         <developerConnection>scm:git:git@github.com:GceCold/OrangeAPI.git</developerConnection>
         <url>git@github.com:GceCold/OrangeAPI.git</url>
-        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
-        <repository>
-            <id>repository</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <properties>
@@ -98,18 +97,17 @@
             <id>release</id>
             <build>
                 <plugins>
-                    <!--<plugin>-->
-                    <!--<groupId>org.sonatype.plugins</groupId>-->
-                    <!--<artifactId>nexus-staging-maven-plugin</artifactId>-->
-                    <!--<version>1.6.3</version>-->
-                    <!--<extensions>true</extensions>-->
-                    <!--<configuration>-->
-                    <!--<serverId>ossrh</serverId>-->
-                    <!--<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
-                    <!--<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
-                    <!--</configuration>-->
-                    <!--</plugin>-->
-
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.3</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>
@@ -133,7 +131,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>

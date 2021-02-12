@@ -4,6 +4,9 @@
 
 ## OrangeAPI
 
+[![](https://img.shields.io/github/license/GceCold/OrangeAPI?style=flat-square)](https://github.com/GceCold/OrangeAPI)
+[![](https://img.shields.io/circleci/build/github/GceCold/OrangeAPI?style=flat-square)](https://img.shields.io/circleci/build/github/GceCold/OrangeAPI?style=flat-square)
+
 The OrangeAPI provides some web API framework to easy develop
 
 ## Inclusion
@@ -15,6 +18,17 @@ The OrangeAPI provides some web API framework to easy develop
 
 JDK 8 is required.
 
+## Maven Dependency
+
+Add the following Maven dependency to your own project pom.xml:
+
+```
+<dependency>
+    <groupId>ltd.icecold</groupId>
+    <artifactId>OrangeAPI</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 ## Thanks
 
 [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi "Binaryify/NeteaseCloudMusicApi")
