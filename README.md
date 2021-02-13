@@ -61,7 +61,7 @@ public static NeteaseResponseBody playlistDetail(String id,String s,Map<String,S
 #### VideoDownload
 
 ```java
-//File format is "FLV"
+//File format must be "FLV"
 new BilibiliVideoAPI().getVideoUrlV1("BV1uv411z7MB").download(new File("1.flv"), 10);
 ```
 `BilibiliDownloaderThread#getCompleteRate` can get downloading complete rate
