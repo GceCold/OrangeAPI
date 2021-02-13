@@ -42,7 +42,8 @@ public class NeteaseRequest {
         throw new NullPointerException("Error Crypto Type");
     }
 
-    public static NeteaseResponseBody apiPostRequest(NeteaseRequestOptions requestOptions, Map<String, String> requestData) {
+    @Deprecated
+    private static NeteaseResponseBody apiPostRequest(NeteaseRequestOptions requestOptions, Map<String, String> requestData) {
         try {
             Map<String, String> headers = new HashMap<>();
             headers.put("Content-Type", "application/x-www-form-urlencoded");

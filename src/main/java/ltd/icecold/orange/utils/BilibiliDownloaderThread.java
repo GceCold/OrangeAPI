@@ -26,6 +26,13 @@ public class BilibiliDownloaderThread {
 
     private String referer;
 
+    /**
+     * Bilibili视频下载（多线程下载）
+     * @param url 下载地址
+     * @param targetFile 目标文件
+     * @param threadNum 线程数
+     * @param referer referer地址
+     */
     public BilibiliDownloaderThread(String url,File targetFile, int threadNum, String referer)
     {
         this.path = url;
@@ -35,6 +42,10 @@ public class BilibiliDownloaderThread {
         this.referer = referer;
     }
 
+    /**
+     * 开始下载
+     * @throws Exception Exception
+     */
     public void start() throws Exception
     {
         URL url=new URL(path);
@@ -66,6 +77,10 @@ public class BilibiliDownloaderThread {
         }
     }
 
+    /**
+     * 获取下载进度
+     * @return 下载进度
+     */
     public double getCompleteRate()
     {
         int sumSize=0;

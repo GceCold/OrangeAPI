@@ -12,9 +12,21 @@ import java.util.Map;
  * @author ice-cold
  */
 public class NeteaseRequestOptions {
+    /**
+     * api地址
+     */
     private String url;
+    /**
+     * 加密方式
+     */
     private NeteaseCrypto.CryptoType crypto;
+    /**
+     * 用户cookie
+     */
     private Map<String,String> cookie;
+    /**
+     * UserAgent
+     */
     private String userAgent;
 
     public NeteaseRequestOptions(String url, NeteaseCrypto.CryptoType crypto, Map<String,String> cookie, Request.UserAgentType userAgent) {

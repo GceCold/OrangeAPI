@@ -24,6 +24,7 @@ public class NeteaseUserAPI {
 
     /**
      * 邮箱登录
+     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误
      * @param userName 邮箱
      * @param password 密码需MD5加密
      * @return data
@@ -47,6 +48,7 @@ public class NeteaseUserAPI {
 
     /**
      * 手机登录
+     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误
      * @param phone 邮箱
      * @param password 密码需MD5加密
      * @return data
@@ -69,6 +71,7 @@ public class NeteaseUserAPI {
 
     /**
      * 刷新登录
+     * 根据body中的code判断是否刷新成功
      * @return data
      */
     public NeteaseResponseBody loginRefresh(){

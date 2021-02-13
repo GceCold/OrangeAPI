@@ -8,8 +8,13 @@ import java.util.List;
  */
 public class BilibiliVideoUrl {
     private String refererUrl;
-    private List<String> videoUrlList = new ArrayList<>();
+    private List<String> videoUrlList;
 
+    /**
+     * Bilibili视频链接
+     * @param refererUrl 下载时需要的referer地址
+     * @param videoUrlList 视频地址
+     */
     public BilibiliVideoUrl(String refererUrl, List<String> videoUrlList) {
         this.refererUrl = refererUrl;
         this.videoUrlList = videoUrlList;

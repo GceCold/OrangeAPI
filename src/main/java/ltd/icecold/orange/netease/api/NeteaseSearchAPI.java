@@ -51,6 +51,11 @@ public class NeteaseSearchAPI {
         return NeteaseRequest.postRequest(neteaseRequestOptions, data);
     }
 
+    /**
+     * 搜索时默认词语
+     * @param cookie 用户cookie
+     * @return result
+     */
     public NeteaseResponseBody defaultKeyword(Map<String,String> cookie){
         NeteaseRequestOptions neteaseRequestOptions = new NeteaseRequestOptions("https://interface3.music.163.com/eapi/search/defaultkeyword/get", NeteaseCrypto.CryptoType.EAPI, cookie, Request.UserAgentType.ANDROID);
         Map<String, String> data = new HashMap<>();

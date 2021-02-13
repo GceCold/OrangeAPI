@@ -29,11 +29,20 @@ public class Request {
         chinaIp.add("157.119.132");
     }
 
+    /**
+     * 获取随机中国大陆ip
+     * @return ip
+     */
     public static String getRandomChinaIp(){
         Random random =new Random();
         return chinaIp.get(random.nextInt(10)) + "." + (random.nextInt(254) + 1);
     }
 
+    /**
+     * 根据UserAgent类型获取UserAgent
+     * @param type 类型
+     * @return UserAgent
+     */
     public static String getUserAgent(UserAgentType type){
         Random random =new Random();
         if (type == UserAgentType.ANDROID){

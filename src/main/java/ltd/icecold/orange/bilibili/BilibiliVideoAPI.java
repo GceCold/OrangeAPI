@@ -59,7 +59,7 @@ public class BilibiliVideoAPI {
     }
 
     /**
-     * 获取视频链接 免登陆1080p（无法直接访问下载）
+     * 获取视频链接 免登陆1080p（无法直接访问下载） 可能会有多个文件
      * @param bid 视频bid(bvxxxxx)
      * @return this
      * @throws IOException Exception
@@ -88,7 +88,13 @@ public class BilibiliVideoAPI {
     public BilibiliVideoUrl getVideoUrlList(){return bilibiliVideoUrl;}
 
 
-
+    /**
+     * 下载视频
+     * @param targetFile 目标文件
+     * @param threadNum 线程数
+     * @return 所有视频文件的BilibiliDownloaderThread
+     * @throws Exception Exception
+     */
     public List<BilibiliDownloaderThread> download(File targetFile, int threadNum) throws Exception {
         if (bilibiliVideoUrl.getVideoUrlList().size() == 0){
             throw new NullPointerException("Null Video Info");

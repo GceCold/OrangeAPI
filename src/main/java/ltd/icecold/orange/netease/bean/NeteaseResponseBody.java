@@ -8,8 +8,17 @@ import java.util.Map;
  * @author ice-cold
  */
 public class NeteaseResponseBody {
+    /**
+     * 访问返回Cookie
+     */
     private Map<String,String> cookie;
+    /**
+     * 返回数据主体
+     */
     private String body;
+    /**
+     * 访问响应码，并非数据主体中的code码，两者不同
+     */
     private int code;
 
     public NeteaseResponseBody(Map<String, String> cookie, String body, int code) {
