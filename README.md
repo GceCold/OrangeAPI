@@ -28,9 +28,7 @@ JDK 8 is required.
 
 OrangeAPI has developed 4 parts of Netease Music API.
 
-#### User
-
-#####Login
+#### User Login
 
 ```java
 NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
