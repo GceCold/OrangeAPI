@@ -9,6 +9,8 @@
 
 The OrangeAPI provides some web API framework to easy develop.
 
+This project originated from [VexMusic](https://github.com/GceCold/VexMusic).
+
 Because the national college entrance examination can't continue to develop.But `Netease` API you can easy use.
 
 ## Inclusion
