@@ -5,7 +5,7 @@
 ## OrangeAPI
 
 [![](https://img.shields.io/github/license/GceCold/OrangeAPI?style=flat-square)](https://github.com/GceCold/OrangeAPI)
-[![](https://img.shields.io/circleci/build/github/GceCold/OrangeAPI?style=flat-square)](https://img.shields.io/circleci/build/github/GceCold/OrangeAPI?style=flat-square)
+[![](https://img.shields.io/github/workflow/status/GceCold/OrangeAPI/Java%20CI%20with%20Maven?style=flat-square)](https://img.shields.io/github/workflow/status/GceCold/OrangeAPI/Java%20CI%20with%20Maven?style=flat-square)
 
 The OrangeAPI provides some web API framework to easy develop.
 
