@@ -43,7 +43,7 @@ neteaseUserAPI.loginPhone("13333333333","7b7bc2512ee1fedcd76bdc68926d4f7b");
 
 #### Custom
 
-You can refer to [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi "Binaryify/NeteaseCloudMusicApi") to develop your own new API. It's easy.
+You can refer to [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi "Binaryify/NeteaseCloudMusicApi") to develop your own new API.
 
 Here is an example. [NeteasePlayListAPI#playlistDetail](https://github.com/GceCold/OrangeAPI/blob/master/src/main/java/ltd/icecold/orange/netease/api/NeteasePlayListAPI.java "playlistDetail")
 
