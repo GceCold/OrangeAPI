@@ -11,7 +11,7 @@ The OrangeAPI provides a Web-based API framework for developers wishing to devel
 
 This project originates from [VexMusic](https://github.com/GceCold/VexMusic).
 
-The author (IceCold) can't continue to develop new APIs and fix issues because of the upcoming College Entrance Examination. But you can easily use the `Netease` API which is already quite complete.
+The author (IceCold) can't continue to develop new APIs and fix issues because of the upcoming National Matriculation Entrance Test. But you can easily use the `Netease` API which is already quite complete.
 
 ## Capabilities
 
@@ -29,6 +29,8 @@ JDK 8 or above is required.
 ### Netease
 
 4 parts of Netease Music API have been encapsulated by the Orange API framework and can be used directly.
+
+JavaDoc：[https://gcecold.github.io/OrangeAPI/javadoc/](https://gcecold.github.io/OrangeAPI/javadoc/ "JavaDoc")
 
 #### User Login
 
@@ -57,6 +59,10 @@ public static NeteaseResponseBody playlistDetail(String id,String s,Map<String,S
     return NeteaseRequest.postRequest(requestOptions, data);
 }
 ```
+
+#### Demo
+
+A simple music bot：[https://github.com/GceCold/MusicBot](https://github.com/GceCold/MusicBot)
 
 ### Bilibili
 
