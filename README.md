@@ -95,7 +95,7 @@ Add the following Maven dependency to the pom.xml file of your own project:
 To use Orange API via Gradle, add the following code to your build.gradle file.
 
 ```
-compile group: 'ltd.icecold', name: 'OrangeAPI', version: '1.0.1'
+implementation group: 'ltd.icecold', name: 'OrangeAPI', version: '1.0.1'
 ```
 
 
