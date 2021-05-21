@@ -81,10 +81,7 @@ public class NeteaseUserAPI {
         NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/login/token/refresh", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
         Map<String, String> data = new HashMap<>();
         data.put("csrf_token", cookie.get("__csrf"));
-        NeteaseResponseBody responseBody = NeteaseRequest.postRequest(requestOptions, data);
-        cookie = responseBody.getCookie();
-        userDetail = responseBody.getBody();
-        return responseBody;
+        return NeteaseRequest.postRequest(requestOptions, data);
     }
     
 }
