@@ -6,7 +6,7 @@
 
     <groupId>ltd.icecold</groupId>
     <artifactId>OrangeAPI</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <name>OrangeAPI</name>
     <description>The OrangeAPI provides some web API framework to easy develop</description>
@@ -201,8 +201,19 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.66</version>
+            <version>1.64</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.4.1</version>
         </dependency>
     </dependencies>
-
 </project>
