@@ -12,12 +12,15 @@ import ltd.icecold.orange.netease.NeteaseRequest;
 import ltd.icecold.orange.netease.bean.NeteaseRequestOptions;
 import ltd.icecold.orange.netease.bean.NeteaseResponseBody;
 import ltd.icecold.orange.network.Request;
+import ltd.icecold.orange.utils.QrCodeImageUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +39,7 @@ public class NeteaseUserAPI {
 
     /**
      * 邮箱登录
-     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误
+     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误 501账号不存在
      *
      * @param userName 邮箱
      * @param password 密码需MD5加密
@@ -45,7 +48,6 @@ public class NeteaseUserAPI {
     public NeteaseResponseBody login(String userName, String password) {
         cookie.put("os", "pc");
         NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/login", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
-        System.out.println(requestOptions.getUserAgent());
         Map<String, String> data = new HashMap<>();
 
         data.put("username", userName);
@@ -59,9 +61,15 @@ public class NeteaseUserAPI {
         return responseBody;
     }
 
+    public static void main(String[] args) {
+        NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
+        NeteaseResponseBody login = neteaseUserAPI.loginPhone("13366277777", DigestUtils.md5Hex("32414"));
+        System.out.println(login.getBody());
+    }
+
     /**
      * 手机登录
-     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误
+     * 如果body中的code为200则登录成功 cookie可正常使用 502为账号或密码错误 501账号不存在
      *
      * @param phone    邮箱
      * @param password 密码需MD5加密
@@ -103,11 +111,12 @@ public class NeteaseUserAPI {
      * 生成二维码key
      * @return key
      */
-    private static NeteaseResponseBody getQrKey() {
+    public String getQrKey() {
         NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/login/qrcode/unikey", NeteaseCrypto.CryptoType.WEAPI, new HashMap<>(), Request.UserAgentType.PC);
         Map<String, String> data = new HashMap<>();
         data.put("type", "1");
-        return NeteaseRequest.postRequest(requestOptions, data);
+        NeteaseResponseBody responseBody = NeteaseRequest.postRequest(requestOptions, data);
+        return new JsonParser().parse(responseBody.getBody()).getAsJsonObject().get("unikey").getAsString();
     }
 
     /**
@@ -116,9 +125,9 @@ public class NeteaseUserAPI {
      * @param width 二维码图片宽
      * @param height 二维码图片搞
      * @return 二维码
-     * @throws WriterException
+     * @throws WriterException encode错误
      */
-    public static BufferedImage generateQRCode(String key,int width,int height) throws WriterException {
+    public BufferedImage generateQRCode(String key,int width,int height) throws WriterException {
         String qrUrl = "https://music.163.com/login?codekey=" + key;
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(qrUrl, BarcodeFormat.QR_CODE, width, height);
@@ -127,15 +136,56 @@ public class NeteaseUserAPI {
     }
 
     /**
+     * 生成自定义样式二维码
+     * @param key 二维码key
+     * @param width 二维码图片宽
+     * @param height 二维码图片搞
+     * @param matrixToImageConfig 样式设置
+     * @param deleteWhite 是否移除白边 实际二维码大小会小于设定值
+     * @return 二维码
+     * @throws WriterException encode错误
+     */
+    public BufferedImage generateQRCode(String key,int width,int height,MatrixToImageConfig matrixToImageConfig,boolean deleteWhite) throws WriterException {
+        String qrUrl = "https://music.163.com/login?codekey=" + key;
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(qrUrl, BarcodeFormat.QR_CODE, width, height);
+        if (deleteWhite){
+            int[] rec = bitMatrix.getEnclosingRectangle();
+            int resWidth = rec[2] + 1;
+            int resHeight = rec[3] + 1;
+
+            BitMatrix resMatrix = new BitMatrix(resWidth, resHeight);
+            resMatrix.clear();
+            for (int i = 0; i < resWidth; i++) {
+                for (int j = 0; j < resHeight; j++) {
+                    if (bitMatrix.get(i + rec[0], j + rec[1]))
+                        resMatrix.set(i, j);
+                }
+            }
+            bitMatrix = resMatrix;
+        }
+        //MatrixToImageConfig matrixToImageConfig = new MatrixToImageConfig(new Color(51,94,234).getRGB(), new Color(255,255,255,0).getRGB());
+        return MatrixToImageWriter.toBufferedImage(bitMatrix, matrixToImageConfig);
+    }
+
+    /**
      * 检测二维码扫描状态
      * @param key 二维码key
      * @return 800 二维码不存在或已过期；801 等待扫码；802 授权中；803 授权登录成功
      */
-    public static NeteaseResponseBody checkQrLogin(String key) {
+    public NeteaseResponseBody checkQrLogin(String key) {
         NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/login/qrcode/client/login", NeteaseCrypto.CryptoType.WEAPI, new HashMap<>(), Request.UserAgentType.PC);
         Map<String, String> data = new HashMap<>();
         data.put("type", "1");
         data.put("key", key);
-        return NeteaseRequest.postRequest(requestOptions, data);
+        NeteaseResponseBody responseBody = NeteaseRequest.postRequest(requestOptions, data);
+        int code = new JsonParser().parse(responseBody.getBody()).getAsJsonObject().get("code").getAsInt();
+        if (code == 803){
+            this.cookie=responseBody.getCookie();
+        }
+        return responseBody;
     }
+
+
+
 }

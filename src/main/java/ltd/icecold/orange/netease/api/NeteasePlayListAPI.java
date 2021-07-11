@@ -32,4 +32,27 @@ public class NeteasePlayListAPI {
         return NeteaseRequest.postRequest(requestOptions, data);
     }
 
+    /**
+     * 获取推荐歌单
+     * @param limit 数量
+     * @return result
+     */
+    public static NeteaseResponseBody personalized(int limit){
+        Map<String, String> data = new HashMap<>();
+        data.put("limit", String.valueOf(limit));
+        data.put("total", "true");
+        data.put("n", "1000");
+        NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/personalized/playlist", NeteaseCrypto.CryptoType.WEAPI, new HashMap<>(), Request.UserAgentType.PC);
+        return NeteaseRequest.postRequest(requestOptions, data);
+    }
+
+    /**
+     * 获取每日推荐歌单
+     * @return result
+     */
+    public static NeteaseResponseBody recommend(Map<String,String> cookie){
+        NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/v1/discovery/recommend/resource", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
+        return NeteaseRequest.postRequest(requestOptions, new HashMap<>());
+    }
+
 }

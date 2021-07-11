@@ -6,7 +6,7 @@
 
     <groupId>ltd.icecold</groupId>
     <artifactId>OrangeAPI</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <name>OrangeAPI</name>
     <description>The OrangeAPI provides some web API framework to easy develop</description>
@@ -70,6 +70,16 @@
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                 </configuration>
                 <executions>
                     <execution>
