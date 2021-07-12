@@ -22,7 +22,7 @@ public class NeteaseSearchAPI {
      * @param cookie 用户cookie
      * @return data
      */
-    public NeteaseResponseBody search(String keywords, Integer limit, Map<String,String> cookie){
+    public static NeteaseResponseBody search(String keywords, Integer limit, Map<String,String> cookie){
         NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/search/get", NeteaseCrypto.CryptoType.WEAPI, cookie , Request.UserAgentType.PC);
         Map<String, String> data = new HashMap<>();
         data.put("s",keywords);
@@ -41,7 +41,7 @@ public class NeteaseSearchAPI {
      * @param cookie 用户cookie
      * @return json
      */
-    public NeteaseResponseBody search(String keywords,Integer type,Integer limit,Integer offset, Map<String,String> cookie){
+    public static NeteaseResponseBody search(String keywords,Integer type,Integer limit,Integer offset, Map<String,String> cookie){
         NeteaseRequestOptions neteaseRequestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/search/get", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
         Map<String, String> data = new HashMap<>();
         data.put("s",keywords);
@@ -56,7 +56,7 @@ public class NeteaseSearchAPI {
      * @param cookie 用户cookie
      * @return result
      */
-    public NeteaseResponseBody defaultKeyword(Map<String,String> cookie){
+    public static NeteaseResponseBody defaultKeyword(Map<String,String> cookie){
         NeteaseRequestOptions neteaseRequestOptions = new NeteaseRequestOptions("https://interface3.music.163.com/eapi/search/defaultkeyword/get", NeteaseCrypto.CryptoType.EAPI, cookie, Request.UserAgentType.ANDROID);
         Map<String, String> data = new HashMap<>();
         return NeteaseRequest.postRequest(neteaseRequestOptions, data);

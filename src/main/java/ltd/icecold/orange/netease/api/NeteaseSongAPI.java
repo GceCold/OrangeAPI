@@ -96,4 +96,13 @@ public class NeteaseSongAPI {
             return false;
         }
     }
+
+    /**
+     * 获取每日推荐歌曲
+     * @return result
+     */
+    public static NeteaseResponseBody recommend(Map<String,String> cookie){
+        NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/api/v3/discovery/recommend/songs", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
+        return NeteaseRequest.postRequest(requestOptions, new HashMap<>());
+    }
 }
