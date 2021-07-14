@@ -12,15 +12,7 @@ import ltd.icecold.orange.netease.NeteaseRequest;
 import ltd.icecold.orange.netease.bean.NeteaseRequestOptions;
 import ltd.icecold.orange.netease.bean.NeteaseResponseBody;
 import ltd.icecold.orange.network.Request;
-import ltd.icecold.orange.utils.QrCodeImageUtils;
-import org.apache.commons.codec.digest.DigestUtils;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,12 +51,6 @@ public class NeteaseUserAPI {
         cookie = responseBody.getCookie();
         userDetail = responseBody.getBody();
         return responseBody;
-    }
-
-    public static void main(String[] args) {
-        NeteaseUserAPI neteaseUserAPI = new NeteaseUserAPI();
-        NeteaseResponseBody login = neteaseUserAPI.loginPhone("13366277777", DigestUtils.md5Hex("32414"));
-        System.out.println(login.getBody());
     }
 
     /**
