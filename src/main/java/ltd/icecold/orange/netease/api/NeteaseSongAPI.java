@@ -23,6 +23,19 @@ import java.util.Map;
  */
 public class NeteaseSongAPI {
 
+    /**
+     * 获取音乐详细信息
+     *
+     * @param id     音乐ID
+     * @param cookie 用户cookie
+     * @return result
+     */
+    public static NeteaseResponseBody musicDetail(String id, Map<String, String> cookie) {
+        Map<String, String> data = new HashMap<>();
+        data.put("c", "[{\"id\":" + id + "}]");
+        NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/api/v3/song/detail", NeteaseCrypto.CryptoType.WEAPI, cookie, Request.UserAgentType.PC);
+        return NeteaseRequest.postRequest(requestOptions, data);
+    }
 
 
     /**

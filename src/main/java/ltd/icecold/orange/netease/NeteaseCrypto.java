@@ -60,19 +60,14 @@ public class NeteaseCrypto {
         String encSecKey = RSACrypto.rsaEncrypt(tempKey, pubKey, modulus);
 
         Map<String, String> data = new HashMap<>();
+        data.put("key",tempKey);
         data.put("params",params);
         data.put("encSecKey",encSecKey);
         return data;
-        /**
-
-        data.put("crypto",requestOptions.getCrypto());
-         */
-        //data.put("cookie",cookieMap2String(requestOptions.getCookie()));
     }
 
     public static Map<String,String> eapiCrypto(Map<String, Object> requestData, String url){
         String dataJson = new Gson().toJson(requestData);
-        System.out.println(dataJson);
         String message = DigestUtils.md5Hex("nobody"+url+"use"+dataJson+"md5forencrypt");
         String data = url+"-36cd479b6b5-"+dataJson+"-36cd479b6b5-"+message;
         HashMap<String,String> params = new HashMap<>();

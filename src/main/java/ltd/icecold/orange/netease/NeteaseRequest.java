@@ -27,19 +27,17 @@ public class NeteaseRequest {
      * @return 相应数据
      */
     public static NeteaseResponseBody postRequest(NeteaseRequestOptions requestOptions, Map<String, String> requestData) {
-        if (requestOptions.getCrypto() == NeteaseCrypto.CryptoType.LINUXAPI) {
-            return linuxPostRequest(requestOptions, requestData);
+        switch (requestOptions.getCrypto()){
+            case LINUXAPI:
+            case API:
+                return linuxPostRequest(requestOptions, requestData);
+            case WEAPI:
+                return weapiPostRequest(requestOptions, requestData);
+            case EAPI:
+                return eapiPostRequest(requestOptions, requestData);
+            default:
+                throw new NullPointerException("Error Crypto Type");
         }
-        if (requestOptions.getCrypto() == NeteaseCrypto.CryptoType.WEAPI) {
-            return weapiPostRequest(requestOptions, requestData);
-        }
-        if (requestOptions.getCrypto() == NeteaseCrypto.CryptoType.EAPI) {
-            return eapiPostRequest(requestOptions, requestData);
-        }
-        if (requestOptions.getCrypto() == NeteaseCrypto.CryptoType.API) {
-            return linuxPostRequest(requestOptions, requestData);
-        }
-        throw new NullPointerException("Error Crypto Type");
     }
 
     @Deprecated
@@ -58,7 +56,7 @@ public class NeteaseRequest {
                     .headers(headers)
                     .cookies(requestOptions.getCookie())
                     .data(requestData)
-                    .timeout(5 * 1000)
+                    .timeout(10 * 1000)
                     .ignoreContentType(true)
                     .method(Connection.Method.POST)
                     .execute();
@@ -78,15 +76,17 @@ public class NeteaseRequest {
             }
             headers.put("User-Agent", requestOptions.getUserAgent());
             headers.put("X-Real-IP", Request.getRandomChinaIp());
-
+            Map<String, String> cookie = requestOptions.getCookie();
             Map<String, String> data = NeteaseCrypto.weApiCrypto(requestData);
-
+            cookie.put("__remember_me","true");
+            cookie.put("NMTID",data.get("key"));
+            data.remove("key");
             Connection.Response execute = Jsoup
                     .connect(requestOptions.getUrl().replaceAll("\\w*api", "weapi"))
                     .headers(headers)
-                    .cookies(requestOptions.getCookie())
+                    .cookies(cookie)
                     .data(data)
-                    .timeout(5 * 1000)
+                    .timeout(10 * 1000)
                     .ignoreContentType(true)
                     .method(Connection.Method.POST)
                     .execute();
@@ -121,7 +121,7 @@ public class NeteaseRequest {
                     .headers(headers)
                     .cookies(requestOptions.getCookie())
                     .data(stringStringMap)
-                    .timeout(5 * 1000)
+                    .timeout(10 * 1000)
                     .ignoreContentType(true)
                     .method(Connection.Method.POST)
                     .execute();
@@ -173,7 +173,7 @@ public class NeteaseRequest {
                     .headers(headers)
                     .cookies(headerData)
                     .data(eapiCryptoData)
-                    .timeout(5 * 1000)
+                    .timeout(10 * 1000)
                     .ignoreContentType(true)
                     .method(Connection.Method.POST)
                     .execute();

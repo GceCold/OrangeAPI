@@ -20,14 +20,15 @@ import java.security.spec.RSAPublicKeySpec;
 public class RSACrypto {
     /**
      * RSA NoPadding加密
+     *
      * @param originalContent 原始数据
-     * @param encryptKey 秘钥
+     * @param encryptKey      秘钥
      * @return 加密数据
      */
-    public byte[] encryptNoPadding(byte[] originalContent, String encryptKey) {
+    public static byte[] encryptNoPadding(byte[] originalContent, String encryptKey) {
         try {
             Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-            Cipher cipher = Cipher.getInstance("RSA/NONE/NoPadding","BC");
+            Cipher cipher = Cipher.getInstance("RSA/NONE/NoPadding", "BC");
             PublicKey pubKey = getPublicKey(encryptKey, 65537);
             //SecretKeySpec skeySpec = new SecretKeySpec(encryptKey, "RSA");
             cipher.init(Cipher.ENCRYPT_MODE, pubKey);

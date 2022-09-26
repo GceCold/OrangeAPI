@@ -55,6 +55,19 @@ public class NeteasePlayListAPI {
         return NeteaseRequest.postRequest(requestOptions, new HashMap<>());
     }
 
-
+    /**
+     * 获取推荐歌单
+     * @param limit 数量
+     * @return result
+     */
+    public static NeteaseResponseBody topPlaylist(String cat,int limit,int offset){
+        Map<String, String> data = new HashMap<>();
+        data.put("cat", cat);
+        data.put("limit", String.valueOf(limit));
+        data.put("offset", String.valueOf(offset));
+        data.put("total","ture");
+        NeteaseRequestOptions requestOptions = new NeteaseRequestOptions("https://music.163.com/weapi/playlist/list", NeteaseCrypto.CryptoType.WEAPI, new HashMap<>(), Request.UserAgentType.PC);
+        return NeteaseRequest.postRequest(requestOptions, data);
+    }
 
 }
